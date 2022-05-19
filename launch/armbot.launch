@@ -1,0 +1,43 @@
+<launch>
+
+  <!-- Arguments -->
+  <arg name="robot_name" value="armbot"/>
+  <arg name="model" default="$(find armbot_nav)/urdf/armbot/armbot.urdf.xacro"/>
+  <arg name="cmd_vel" default="/armbot/mobile_base_controller/cmd_vel"/>
+
+  <!-- start Gazebo with an empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="verbose" value="false"/>
+    <arg name="world_name" value="$(find armbot_nav)/worlds/simul.world"/>
+  </include>
+  
+  <!--Spawns Robot inside a Gazebo simulation -->
+  <param name="/armbot/robot_description"
+        command="xacro $(arg model)"/>
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_$(arg robot_name)" 
+        args="-x 0.0 -y 0.5 -z 0.1 -unpause -urdf -param /armbot/robot_description -model $(arg robot_name)" respawn="false">
+  </node>
+
+   <!--Spawns Controller inside a Gazebo simulation -->
+  <rosparam command="load"
+            file="$(find armbot_nav)/config/manual_drive.yaml"/>
+  <node name="armbot_controller_spawner" pkg="controller_manager" type="spawner"
+    ns="/armbot" args="joint_state_controller mobile_base_controller"/>
+
+  <!--Setup TF -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="/armbot">
+    <param name="publish_frequency" type="double" value="30.0" />
+    <remap from="/joint_states" to="/armbot/joint_states"/>
+    <remap from="/robot_description" to="/armbot/robot_description" />
+  </node>
+  
+  <!--Setup manual control through GUI -->
+  <param name="/cmd_vel"
+        value="$(arg cmd_vel)"/>
+  <!-- <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="$(arg cmd_vel)"/>
+  </node> -->
+
+</launch>

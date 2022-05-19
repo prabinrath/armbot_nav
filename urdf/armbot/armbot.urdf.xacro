@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<robot name="armbot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="wheel_radius" value="0.08" />
+  <xacro:property name="wheel_thickness" value="0.04" />
+  <xacro:property name="chesis_length" value="0.3" />
+  <xacro:property name="chesis_breadth" value="0.2" />
+  <xacro:property name="chesis_height" value="0.08" />
+
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <xacro:macro name="box_inertia" params="mass x y z">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12)*mass*(y*y+z*z)}" ixy="0.0" ixz="0.0" iyy="${(1/12)*mass*(x*x+z*z)}" iyz="0.0" izz="${(1/12)*mass*(y*y+x*x)}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="cyl_inertia" params="mass r h">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="${(1/12)*mass*(3*r*r+h*h)}" ixy="0.0" ixz="0.0" iyy="${(1/12)*mass*(3*r*r+h*h)}" iyz="0.0" izz="${(1/2)*mass*r*r}" />
+    </inertial>
+  </xacro:macro>
+
+  <link name="base_link"></link>
+
+  <link name="chesis">
+    <visual>
+      <geometry>
+        <box size="${chesis_length} ${chesis_breadth} ${chesis_height}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${chesis_length} ${chesis_breadth} ${chesis_height}"/>
+      </geometry>
+    </collision>
+    <xacro:box_inertia mass="0.5" x="${chesis_length}" y="${chesis_breadth}" z="${chesis_height}"/>
+  </link>
+
+  <gazebo reference="chesis">
+       <material>Gazebo/Blue</material>
+    </gazebo>
+
+  <joint name="fixed_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="chesis"/> 
+  </joint>
+
+  <xacro:macro name="wheel" params="prefix suffix posx posy">
+    <link name="${prefix}_${suffix}_wheel">
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+        </geometry>
+      </collision>
+      <xacro:cyl_inertia mass="0.1" r="${wheel_radius}" h="${wheel_thickness}"/>
+    </link>
+    <joint name="${prefix}_${suffix}_wheel_joint" type="continuous">
+      <axis xyz="0 1 0" rpy="0 0 0" />
+      <parent link="chesis"/>
+      <child link="${prefix}_${suffix}_wheel"/>
+      <origin xyz="${(chesis_length*0.3)*posx} ${(chesis_breadth/2+wheel_thickness/2)*1.1*posy} 0" rpy="0 0 0"/>
+      <dynamics damping="0"/>
+    </joint>
+
+    <gazebo reference="${prefix}_${suffix}_wheel">
+       <material>Gazebo/DarkGray</material>
+    </gazebo>
+
+    <transmission name="${prefix}_${suffix}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="${prefix}_${suffix}_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${prefix}_${suffix}_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:wheel prefix="front" suffix="left" posx="1" posy="1"/>
+  <xacro:wheel prefix="front" suffix="right" posx="1" posy="-1"/>
+  <xacro:wheel prefix="back" suffix="left" posx="-1" posy="1"/>
+  <xacro:wheel prefix="back" suffix="right" posx="-1" posy="-1"/>
+
+  <xacro:include filename="$(find armbot_nav)/urdf/armbot/sensors.xacro"/>
+  <xacro:rgb_camera camera_name="armbot_rgb_camera" parent_link="chesis">
+    <box size="0.001 0.008 0.008"/>
+    <origin xyz="${(chesis_length/2)*1.001} 0 ${(chesis_height/2)*0.5}" rpy="0 0 0"/>
+  </xacro:rgb_camera>
+  <xacro:depth_camera camera_name="armbot_depth_camera" parent_link="chesis">
+    <box size="0.001 0.08 0.01"/>
+    <origin xyz="${(chesis_length/2)*1.001} 0 0" rpy="0 0 0"/>
+  </xacro:depth_camera>
+  <xacro:imu imu_name="armbot_chesis_imu" parent_link="chesis">
+        <box size="0.008 0.008 0.001"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:imu>
+  <xacro:laser_scanner laser_name="armbot_laser_scanner" parent_link="chesis">
+    <cylinder length="0.04" radius="0.04"/>
+    <origin xyz="${(chesis_length/2)*0.75} 0 ${(chesis_height/2)*2}" rpy="0 0 0"/>
+  </xacro:laser_scanner>
+
+  <!-- Gazebo plugin for ROS Control -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/armbot</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+</robot>
