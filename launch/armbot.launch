@@ -23,10 +23,10 @@
   <!--Spawns Controller inside a Gazebo simulation -->
   <rosparam command="load"
             file="$(find armbot_nav)/config/manual_drive.yaml"/>
-  <!-- <node name="armbot_controller_spawner" pkg="controller_manager" type="spawner"
-    ns="/armbot" args="joint_state_controller"/> -->
   <node name="armbot_controller_spawner" pkg="controller_manager" type="spawner"
-    ns="/armbot" args="joint_state_controller mobile_base_controller"/>
+    ns="/armbot" args="joint_state_controller"/>
+  <!-- <node name="armbot_controller_spawner" pkg="controller_manager" type="spawner"
+    ns="/armbot" args="joint_state_controller mobile_base_controller"/> -->
 
   <!--Setup TF -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="/armbot">
