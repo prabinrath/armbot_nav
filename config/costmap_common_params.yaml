@@ -1,0 +1,9 @@
+obstacle_range: 2.5
+raytrace_range: 3.0
+footprint: [[0.2, 0.2], [0.2, -0.2], [-0.2, -0.2], [-0.2, 0.2]]
+#robot_radius: ir_of_robot
+inflation_radius: 0.55
+
+observation_sources: laser_scan_sensor point_cloud_sensor
+laser_scan_sensor: {sensor_frame: armbot_laser_scanner, data_type: LaserScan, topic: /armbot_laser_scanner/laser/scan, marking: true, clearing: true}
+point_cloud_sensor: {sensor_frame: camera_depth_link, data_type: PointCloud, topic: /armbot_depth_camera/depth/points, marking: true, clearing: true}

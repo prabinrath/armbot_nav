@@ -1,0 +1,33 @@
+<launch>
+
+    <arg name="scan_topic"  default="/armbot_laser_scanner/laser/scan" />
+
+    <!-- Run the map server --> 
+    <arg name="map_file" default="$(find armbot_nav)/maps/house_map.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" respawn="true" />
+
+    <!--- Run AMCL --> 
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <remap from="scan" to="$(arg scan_topic)"/>
+        <param name="odom_frame_id" value="odom"/>
+        <param name="odom_model_type" value="diff-corrected"/>
+        <param name="base_frame_id" value="base_link"/>
+        <param name="update_min_d" value="0.1"/>
+        <param name="update_min_a" value="0.2"/>
+        <param name="min_particles" value="500"/>
+        <param name="global_frame_id" value="map"/>
+        <param name="tf_broadcast" value="true" />
+        <param name="initial_pose_x" value="0.0"/>
+        <param name="initial_pose_y" value="0.0"/>
+        <param name="initial_pose_a" value="0.0"/>
+    </node>
+
+    <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find armbot_nav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+        <rosparam file="$(find armbot_nav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find armbot_nav)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find armbot_nav)/config/global_costmap_params.yaml" command="load" /> 
+        <rosparam file="$(find armbot_nav)/config/base_local_planner_params.yaml" command="load" />
+    </node> -->
+
+</launch> 
