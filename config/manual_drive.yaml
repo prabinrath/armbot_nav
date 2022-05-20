@@ -14,13 +14,17 @@ armbot:
     left_wheel: ['front_left_wheel_joint', 'back_left_wheel_joint']
     right_wheel: ['front_right_wheel_joint', 'back_right_wheel_joint']
     publish_rate: 50
-    pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
-    twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
     cmd_vel_timeout: 0.25    
+    
+    # Wheel odometry needs to be fused with IMU using robot_localization for better accuracy
     enable_odom_tf: true
+
     # Wheel separation and radius multipliers
-    wheel_separation_multiplier: 1.0 # default: 1.0
+    wheel_separation_multiplier: 1.5 # default: 1.0 but needs to change for Skid Steering Drive
     wheel_radius_multiplier    : 1.0 # default: 1.0
+
     # Velocity and acceleration limits
     # Whenever a min_* is unspecified, default to -max_*
     linear:

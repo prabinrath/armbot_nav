@@ -85,17 +85,28 @@
     </joint>
 
     <gazebo reference="${prefix}_${suffix}_wheel">
+      <!-- <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" /> -->
        <material>Gazebo/DarkGray</material>
     </gazebo>
 
     <transmission name="${prefix}_${suffix}_wheel_trans">
-      <type>transmission_interface/SimpleTransmission</type>
+      <type>transmission_interface/SimpleTransmission</type>      
+      <joint name="${prefix}_${suffix}_wheel_joint">
+        <!-- Needed for ros deifferential drive controller -->
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <!-- Needed for gazebo differential drive controller -->
+        <!-- <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
+      </joint>
       <actuator name="${prefix}_${suffix}_wheel_motor">
+        <!-- Needed for ros deifferential drive controller -->
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <!-- Needed for gazebo differential drive controller -->
+        <!-- <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface> -->
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
-      <joint name="${prefix}_${suffix}_wheel_joint">
-        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-      </joint>
     </transmission>
   </xacro:macro>
 
@@ -121,6 +132,29 @@
     <cylinder length="0.04" radius="0.04"/>
     <origin xyz="${(chesis_length/2)*0.75} 0 ${(chesis_height/2)*2}" rpy="0 0 0"/>
   </xacro:laser_scanner>
+
+  <!-- <gazebo>
+    <plugin name="mobile_base_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/armbot/mobile_base_controller</robotNamespace>
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>back_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>back_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>0.264</wheelSeparation>
+      <wheelDiameter>${wheel_radius}*2</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <torque>20</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <covariance_x>100.0</covariance_x>
+      <covariance_y>100.0</covariance_y>
+      <covariance_yaw>100.0</covariance_yaw>
+      <odometryRate>20.0</odometryRate>
+      <broadcastTF>true</broadcastTF>
+    </plugin>
+  </gazebo> -->
 
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>

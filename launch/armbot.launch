@@ -20,9 +20,11 @@
         args="-x 0.0 -y 0.5 -z 0.1 -unpause -urdf -param /armbot/robot_description -model $(arg robot_name)" respawn="false">
   </node>
 
-   <!--Spawns Controller inside a Gazebo simulation -->
+  <!--Spawns Controller inside a Gazebo simulation -->
   <rosparam command="load"
             file="$(find armbot_nav)/config/manual_drive.yaml"/>
+  <!-- <node name="armbot_controller_spawner" pkg="controller_manager" type="spawner"
+    ns="/armbot" args="joint_state_controller"/> -->
   <node name="armbot_controller_spawner" pkg="controller_manager" type="spawner"
     ns="/armbot" args="joint_state_controller mobile_base_controller"/>
 
@@ -32,7 +34,10 @@
     <remap from="/joint_states" to="/armbot/joint_states"/>
     <remap from="/robot_description" to="/armbot/robot_description" />
   </node>
-  
+
+  <!-- RViz -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find armbot_nav)/rviz/armbot_nav.rviz" />
+
   <!--Setup manual control through GUI -->
   <param name="/cmd_vel"
         value="$(arg cmd_vel)"/>
