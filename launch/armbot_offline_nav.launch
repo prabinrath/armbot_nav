@@ -18,16 +18,20 @@
         <param name="global_frame_id" value="map"/>
         <param name="tf_broadcast" value="true" />
         <param name="initial_pose_x" value="0.0"/>
-        <param name="initial_pose_y" value="0.0"/>
+        <param name="initial_pose_y" value="0.5"/>
         <param name="initial_pose_a" value="0.0"/>
     </node>
 
-    <!-- <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
+        <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>        
         <rosparam file="$(find armbot_nav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
         <rosparam file="$(find armbot_nav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find armbot_nav)/config/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find armbot_nav)/config/global_costmap_params.yaml" command="load" /> 
         <rosparam file="$(find armbot_nav)/config/base_local_planner_params.yaml" command="load" />
-    </node> -->
+        <remap from="/cmd_vel" to="/armbot/mobile_base_controller/cmd_vel"/>
+        <remap from="/odom" to="/armbot/mobile_base_controller/odom"/>
+    </node>
 
 </launch> 
