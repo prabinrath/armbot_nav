@@ -5,6 +5,8 @@ local_costmap:
   origin_y: -1.5
   global_frame: odom
   rolling_window: true
+  inflation_layer:
+    inflation_radius: 1.0
   plugins:
     - {name: obstacle_layer, type: "costmap_2d::VoxelLayer"}
     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}

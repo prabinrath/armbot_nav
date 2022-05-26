@@ -16,9 +16,4 @@ static_layer:
 
 obstacle_layer:
     observation_sources: laser_scan_sensor
-    # observation_sources: laser_scan_sensor point_cloud_sensor
     laser_scan_sensor: {sensor_frame: armbot_laser_scanner, data_type: LaserScan, topic: /armbot_laser_scanner/laser/scan, marking: true, clearing: true}
-    # point_cloud_sensor: {sensor_frame: camera_depth_link, data_type: PointCloud2, topic: /armbot_depth_camera/depth/points, marking: true, clearing: true}
-
-inflation_layer:
-    inflation_radius: 1.0
