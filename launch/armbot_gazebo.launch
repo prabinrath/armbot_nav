@@ -1,4 +1,6 @@
 <launch>
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find armbot_nav)/meshes"/>
+  <env name="GAZEBO_MODEL_PATH" value="$(find armbot_nav)/meshes"/>
 
   <!-- Arguments -->
   <arg name="robot_name" value="armbot"/>
@@ -10,7 +12,7 @@
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="verbose" value="false"/>
-    <arg name="world_name" value="$(find armbot_nav)/worlds/simul.world"/>
+    <arg name="world_name" value="$(find armbot_nav)/worlds/large_house1.world"/>
   </include>
   
   <!--Spawns Robot inside a Gazebo simulation -->

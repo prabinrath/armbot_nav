@@ -33,7 +33,7 @@
 
     <!-- A turtlebot symbol -->
     <include>
-      <uri>model://turtlebot3_house</uri>
+      <uri>model://small_house</uri>
     </include>
 
     <scene>
