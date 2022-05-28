@@ -1,4 +1,4 @@
-image: house_map.pgm
+image: small_house1_map.pgm
 resolution: 0.050000
 origin: [-13.800000, -15.400000, 0.000000]
 negate: 0

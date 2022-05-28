@@ -218,7 +218,6 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
-        "": true
         Grid: true
         LaserScan: true
         Map: true
@@ -226,6 +225,7 @@ Visualization Manager:
         Odometry: true
         Path: true
         PointCloud2: true
+        PointStamped: true
         Polygon: true
         Pose: true
         RobotModel: true
@@ -276,7 +276,7 @@ Visualization Manager:
       Axes Radius: 0.10000000149011612
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Pose
@@ -286,7 +286,7 @@ Visualization Manager:
       Shape: Arrow
       Topic: /move_base_simple/goal
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -364,7 +364,7 @@ Visualization Manager:
       Marker Topic: /frontiers
       Name: Marker
       Namespaces:
-        {}
+        markers2: true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -372,7 +372,7 @@ Visualization Manager:
       Marker Topic: /global_detector_shapes
       Name: Marker
       Namespaces:
-        {}
+        markers: true
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -380,7 +380,7 @@ Visualization Manager:
       Marker Topic: /centroids
       Name: Marker
       Namespaces:
-        {}
+        markers3: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -422,7 +422,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 58.23880386352539
+      Distance: 47.71071243286133
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

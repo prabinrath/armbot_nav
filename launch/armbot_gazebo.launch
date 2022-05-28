@@ -12,7 +12,7 @@
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="verbose" value="false"/>
-    <arg name="world_name" value="$(find armbot_nav)/worlds/large_house1.world"/>
+    <arg name="world_name" value="$(find armbot_nav)/worlds/large_house.world"/>
   </include>
   
   <!--Spawns Robot inside a Gazebo simulation -->
