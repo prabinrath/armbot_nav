@@ -4,8 +4,6 @@ update_frequency: 5.0
 publish_frequency: 3.0
 transform_tolerance: 0.5
 
-resolution: 0.01
-
 obstacle_range: 5.5
 raytrace_range: 6.0
 

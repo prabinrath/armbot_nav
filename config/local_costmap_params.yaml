@@ -4,6 +4,7 @@ local_costmap:
   origin_x: -1.5
   origin_y: -1.5
   global_frame: odom
+  resolution: 0.01
   rolling_window: true
   inflation_layer:
     inflation_radius: 1.0

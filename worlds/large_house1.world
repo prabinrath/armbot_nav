@@ -15,14 +15,14 @@
       <link name="floorPlan">
         <visual name="visual">
           <geometry>
-            <mesh><uri>file://largeMap.dae</uri></mesh>
+            <mesh><uri>file://large_house.dae</uri></mesh>
           </geometry>
         </visual>
       
       
         <collision name="collision">
           <geometry>
-            <mesh><uri>file://largeMap.dae</uri></mesh>
+            <mesh><uri>file://large_house.dae</uri></mesh>
           </geometry>
         </collision>
       </link>

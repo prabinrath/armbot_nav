@@ -61,22 +61,7 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        armbot_chesis_imu:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        armbot_depth_camera:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         armbot_laser_scanner:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        armbot_rgb_camera:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -92,10 +77,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -237,9 +218,11 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
+        "": true
         Grid: true
         LaserScan: true
         Map: true
+        Marker: true
         Odometry: true
         Path: true
         PointCloud2: true
@@ -376,6 +359,41 @@ Visualization Manager:
       Topic: /move_base/NavfnROS/plan
       Unreliable: false
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /frontiers
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /global_detector_shapes
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /centroids
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Class: rviz/PointStamped
+      Color: 204; 41; 204
+      Enabled: true
+      History Length: 1
+      Name: PointStamped
+      Queue Size: 10
+      Radius: 0.20000000298023224
+      Topic: /clicked_point
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -404,7 +422,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 18.75133514404297
+      Distance: 58.23880386352539
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
