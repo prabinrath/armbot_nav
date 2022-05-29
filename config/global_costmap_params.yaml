@@ -1,6 +1,6 @@
 global_costmap:
   global_frame: map
-  rolling_window: true
+  rolling_window: true # true required for rrt_exploration
   width: 100.0
   height: 100.0
   resolution: 0.05

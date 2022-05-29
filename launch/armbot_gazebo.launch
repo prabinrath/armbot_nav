@@ -1,18 +1,18 @@
 <launch>
   <env name="GAZEBO_RESOURCE_PATH" value="$(find armbot_nav)/meshes"/>
-  <env name="GAZEBO_MODEL_PATH" value="$(find armbot_nav)/meshes"/>
 
   <!-- Arguments -->
   <arg name="robot_name" value="armbot"/>
   <arg name="model" default="$(find armbot_nav)/urdf/armbot/armbot.urdf.xacro"/>
   <arg name="cmd_vel" default="/armbot/mobile_base_controller/cmd_vel"/>
+  <arg name="world" default="small_house1"/>
 
   <!-- start Gazebo with an empty world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="verbose" value="false"/>
-    <arg name="world_name" value="$(find armbot_nav)/worlds/large_house.world"/>
+    <arg name="world_name" value="$(find armbot_nav)/worlds/$(arg world).world"/>
   </include>
   
   <!--Spawns Robot inside a Gazebo simulation -->

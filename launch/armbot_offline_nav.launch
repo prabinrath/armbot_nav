@@ -1,9 +1,10 @@
 <launch>
 
     <arg name="scan_topic"  default="/armbot_laser_scanner/laser/scan" />
+    <arg name="map" default="small_house1"/>
 
     <!-- Run the map server --> 
-    <arg name="map_file" default="$(find armbot_nav)/maps/large_house_map.yaml"/>
+    <arg name="map_file" default="$(find armbot_nav)/maps/$(arg map)_map.yaml"/>
     <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" respawn="true" />
 
     <!--- Run AMCL --> 

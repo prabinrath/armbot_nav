@@ -1,6 +1,11 @@
 # Armbot Navigation Package
 This ROS package contains the navigation stack for a custom 4-wheel skid-steer drive robot in Gazebo. The robot is equipped with a 2D-Laser Scanner, a RGBD Camera and an IMU. The purpose of this package is to learn and explore ROS Navigation Stack. The URDF for the robot has a utilitarian design and does not include any mesh files for complex view or geometry. Any one interested with improving the visual aesthetics or geometrical complexity, feel free to do so by modifying the base URDF files.
 
+<p align="center">
+  <img src="media/armbot.png" width="600"/>
+</p>
+
+
 This project was tested on Ubuntu 20.04 LTS with ROS Noetic. Check the ROS official documentation for the Installation [ROS Installation](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 ## Dependencies and Prerequisites
