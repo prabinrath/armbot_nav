@@ -1,13 +1,13 @@
 # Armbot Navigation Package
 This ROS package contains the navigation stack for a custom 4-wheel skid-steer drive robot in Gazebo. The robot is equipped with a 2D-Laser Scanner, a RGBD Camera and an IMU. The purpose of this package is to learn and explore ROS Navigation Stack. The URDF for the robot has a utilitarian design and does not include any mesh files for complex view or geometry. Any one interested with improving the visual aesthetics or geometrical complexity, feel free to do so by modifying the base URDF files.
 
-This project was tested on Ubuntu 20.04 LTS with ROS Noetic. Check the ROS official documentation for the Installation [ROS Installation](http://wiki.ros.org/melodic/Installation/Ubuntu).
+This project was tested on Ubuntu 20.04 LTS with ROS Noetic. Check the ROS official documentation for the Installation [ROS Installation](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 ## Dependencies and Prerequisites
 - [gmapping](http://wiki.ros.org/gmapping): `sudo apt install ros-noetic-gmapping`
 - [ros_control](http://wiki.ros.org/ros_control): `sudo apt install ros-noetic-ros-control ros-noetic-ros-controllers`
 - [navigation](http://wiki.ros.org/navigation): `sudo apt install ros-noetic-navigation`
-- [robot_localization](http://docs.ros.org/en/noetic/api/robot_localization/html/index.html): `sudo apt install ros-melodic-robot_localization`
+- [robot_localization](http://docs.ros.org/en/noetic/api/robot_localization/html/index.html): `sudo apt install ros-noetic-robot-localization`
 - [catkin_tools](https://catkin-tools.readthedocs.io/en/latest/installing.html): `sudo apt install python3-catkin-tools`
 
 ## Installation
@@ -76,4 +76,4 @@ This will start the `gmapping` and `move_base` nodes. Gmapping will publish the 
 ```
 roslaunch armbot_nav rrt_explore.launch
 ```
-This will start the `rrt_exploration` node. Please follow the start exploration tutorial [here](http://wiki.ros.org/rrt_exploration/Tutorials/singleRobot) to start the autonomous exploration. It involves publishing 5 points in a particular sequence to the `rrt_exploration` node using the `Publish Point` button on RViz. With a successful initiation the robot should start exploring the environment autonomously and the same will be visualized on both Gazebo and RViz.
+This will start the `rrt_exploration` node. Please follow the tutorial [here](http://wiki.ros.org/rrt_exploration/Tutorials/singleRobot) to start the autonomous exploration. It involves publishing 5 points in a particular sequence to the `rrt_exploration` node using the `Publish Point` button on RViz. With a successful initiation the robot should start exploring the environment autonomously and the same will be visualized on both Gazebo and RViz.
