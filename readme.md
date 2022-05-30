@@ -41,6 +41,10 @@ rosrun armbot_nav armbot_nav_teleop.py
 ```
 This is a terminal node for sending command velocities to the robot. Use the on screen instructions to manually navigate the robot. While navigating through the gazebo environment the map will get updated in realtime which can be visualized in the `rviz` window. Once mapping is complete use the command `rosrun map_server map_saver -f map` to save the generated map for later use.
 
+<p align="center">
+  <img src="media/gmapping.gif"/>
+</p>
+
 ## Offline Navigation on Generated Map
 > Step 1
 ```
@@ -55,6 +59,10 @@ This will start the `map_server`, `amcl` and `move_base` nodes. Map server will 
 > Step 3
 
 Use the `2D Nav Goal` button on RViz to assign a navigation goal to the robot within the map. Now the robot should navigate to the assigned goal and the same will be visualized on both Gazebo and RViz.
+
+<p align="center">
+  <img src="media/navigation.gif"/>
+</p>
 
 ## Online Navigation and Autonomous Exploration
 The manual driving involved in the map generation process can become cumbersome for large maps. This process can be automated where the robot autonomously explores the unknown spaces in the environment and generates the map. It requires installation of an additional ROS package called [rrt_exploration](http://wiki.ros.org/rrt_exploration). 
@@ -82,3 +90,7 @@ This will start the `gmapping` and `move_base` nodes. Gmapping will publish the 
 roslaunch armbot_nav rrt_explore.launch
 ```
 This will start the `rrt_exploration` node. Please follow the tutorial [here](http://wiki.ros.org/rrt_exploration/Tutorials/singleRobot) to start the autonomous exploration. It involves publishing 5 points in a particular sequence to the `rrt_exploration` node using the `Publish Point` button on RViz. With a successful initiation the robot should start exploring the environment autonomously and the same will be visualized on both Gazebo and RViz.
+
+<p align="center">
+  <img src="media/rrt.gif"/>
+</p>
