@@ -95,15 +95,15 @@
     <transmission name="${prefix}_${suffix}_wheel_trans">
       <type>transmission_interface/SimpleTransmission</type>      
       <joint name="${prefix}_${suffix}_wheel_joint">
-        <!-- Needed for ros deifferential drive controller -->
+        <!-- Needed for ros_control skid-steer drive controller -->
         <!-- <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface> -->
-        <!-- Needed for gazebo differential drive controller -->
+        <!-- Needed for gazebo skid-steer drive controller -->
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="${prefix}_${suffix}_wheel_motor">
-        <!-- Needed for ros deifferential drive controller -->
+        <!-- Needed for ros_control skid-steer drive controller -->
         <!-- <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface> -->
-        <!-- Needed for gazebo differential drive controller -->
+        <!-- Needed for gazebo skid-steer drive controller -->
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
